@@ -59,15 +59,38 @@
 	var slidingPuzzle = _react2.default.createClass({
 	  displayName: "slidingPuzzle",
 	  getInitialState: function getInitialState() {
-	    return {};
+	    return {
+	      tiles: [],
+	      tileValues: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+	      emptyValue: 16
+	    };
 	  },
+	  tileClicked: function tileClicked(idx) {},
 
 
 	  render: function render() {
+	    var tiles = [[]];
+	    var tileValues = this.state.tileValues;
+	    var emptyValue = this.state.emptyValue;
+
 	    return _react2.default.createElement(
 	      "div",
 	      { className: "main" },
-	      "\"[][][][]\" \"[][][][]\" \"[][][][]\""
+	      _react2.default.createElement(
+	        "div",
+	        { className: "tilearea" },
+	        tileValues.map(function (tile, idx) {
+	          return _react2.default.createElement(
+	            "p",
+	            {
+	              key: "tile-" + idx,
+	              className: tile === emptyValue ? "tile-normal" : "tile-empty",
+	              onClick: this.tileClicked.bind(this, idx)
+	            },
+	            tile
+	          );
+	        }.bind(this))
+	      )
 	    );
 	  }
 	});
