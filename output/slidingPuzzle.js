@@ -61,7 +61,7 @@
 	  getInitialState: function getInitialState() {
 	    return {
 	      tiles: [],
-	      tileValues: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+	      tileValues: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
 	      emptyValue: 16
 	    };
 	  },
@@ -84,10 +84,10 @@
 	            "p",
 	            {
 	              key: "tile-" + idx,
-	              className: tile === emptyValue ? "tile-normal" : "tile-empty",
+	              className: tile === emptyValue ? "tile-empty" : "tile-normal",
 	              onClick: this.tileClicked.bind(this, idx)
 	            },
-	            tile
+	            tile === emptyValue ? "" : tile
 	          );
 	        }.bind(this))
 	      )

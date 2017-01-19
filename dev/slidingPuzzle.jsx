@@ -5,7 +5,7 @@ let slidingPuzzle = React.createClass({
   getInitialState () {
     return {
       tiles: [],
-      tileValues: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+      tileValues: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
       emptyValue: 16
     };
   },
@@ -25,9 +25,9 @@ let slidingPuzzle = React.createClass({
           { tileValues.map(function (tile, idx){
             return <p
               key={"tile-" + idx}
-              className={tile === emptyValue ? "tile-normal" : "tile-empty"}
+              className={tile === emptyValue ? "tile-empty" : "tile-normal"}
               onClick={ this.tileClicked.bind(this, idx)}
-              >{tile}
+              >{tile === emptyValue ? "" : tile}
             </p>
           }.bind(this))
         }
