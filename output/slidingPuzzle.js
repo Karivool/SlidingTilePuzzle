@@ -59,17 +59,38 @@
 	var slidingPuzzle = _react2.default.createClass({
 	  displayName: "slidingPuzzle",
 	  getInitialState: function getInitialState() {
+	    var vals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+	    var tileValues = this.shuffleNum(vals);
+	    var tileSet = this.setTiles(tileValues);
+
 	    return {
-	      tiles: [],
-	      tileValues: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-	      emptyValue: 16
+	      tileSet: this.tileSet,
+	      tileValues: this.tileValues,
+	      emptyValue: null
 	    };
 	  },
+	  setTiles: function setTiles(tileValues) {
+	    var values = tileValues;
+	    var tileSet = [[], [], [], []];
+
+	    tileSet.forEach(function (tile) {
+	      debugger;
+	    }.bind(values));
+	  },
 	  tileClicked: function tileClicked(idx) {},
+	  shuffleNum: function shuffleNum(vals) {
+	    for (var idx = vals.length; idx; idx--) {
+	      var rand = Math.floor(Math.random() * idx);
+	      var _ref = [vals[rand], vals[idx - 1]];
+	      vals[idx - 1] = _ref[0];
+	      vals[rand] = _ref[1];
+	    }
+	    return vals;
+	  },
 
 
 	  render: function render() {
-	    var tiles = [[]];
+	    var tiles = this.state.tiles;
 	    var tileValues = this.state.tileValues;
 	    var emptyValue = this.state.emptyValue;
 
@@ -79,7 +100,7 @@
 	      _react2.default.createElement(
 	        "div",
 	        { className: "tilearea" },
-	        tileValues.map(function (tile, idx) {
+	        tiles.map(function (row, idx) {
 	          return _react2.default.createElement(
 	            "p",
 	            {
