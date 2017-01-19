@@ -1,16 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-let bingoCard = React.createClass({
+let slidingPuzzle = React.createClass({
   getInitialState () {
     return {
     };
   },
 
-
   render: function() {
     return (
       <div className="main">
+        "[][][][]"
+        "[][][][]"
+        "[][][][]"
       </div>
     );
   }

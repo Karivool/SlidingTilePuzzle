@@ -56,15 +56,19 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var bingoCard = _react2.default.createClass({
-	  displayName: "bingoCard",
+	var slidingPuzzle = _react2.default.createClass({
+	  displayName: "slidingPuzzle",
 	  getInitialState: function getInitialState() {
 	    return {};
 	  },
 
 
 	  render: function render() {
-	    return _react2.default.createElement("div", { className: "main" });
+	    return _react2.default.createElement(
+	      "div",
+	      { className: "main" },
+	      "\"[][][][]\" \"[][][][]\" \"[][][][]\""
+	    );
 	  }
 	});
 
