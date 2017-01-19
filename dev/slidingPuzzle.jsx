@@ -9,9 +9,9 @@ let slidingPuzzle = React.createClass({
     let tileSet = this.setTiles(tileValues);
 
     return {
-      tileSet: this.tileSet,
-      tileValues: this.tileValues,
-      emptyValue: null
+      tileSet: tileSet,
+      tileValues: tileValues,
+      emptyValue: 16,
     };
   },
 
@@ -40,14 +40,14 @@ let slidingPuzzle = React.createClass({
   },
 
   render: function() {
-    const tiles = this.state.tiles;
-    const tileValues = this.state.tileValues;
+    const tiles = this.state.tileSet;
+    const tileValues = this.state.tileValues.concat(16);
     const emptyValue = this.state.emptyValue;
 
     return (
       <div className="main">
         <div className="tilearea">
-          { tiles.map(function (row, idx){
+          { tileValues.map(function (tile, idx){
             return <p
               key={"tile-" + idx}
               className={tile === emptyValue ? "tile-empty" : "tile-normal"}

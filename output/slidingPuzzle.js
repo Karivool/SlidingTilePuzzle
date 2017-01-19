@@ -64,9 +64,9 @@
 	    var tileSet = this.setTiles(tileValues);
 
 	    return {
-	      tileSet: this.tileSet,
-	      tileValues: this.tileValues,
-	      emptyValue: null
+	      tileSet: tileSet,
+	      tileValues: tileValues,
+	      emptyValue: 16
 	    };
 	  },
 	  setTiles: function setTiles(tileValues) {
@@ -93,8 +93,8 @@
 
 
 	  render: function render() {
-	    var tiles = this.state.tiles;
-	    var tileValues = this.state.tileValues;
+	    var tiles = this.state.tileSet;
+	    var tileValues = this.state.tileValues.concat(16);
 	    var emptyValue = this.state.emptyValue;
 
 	    return _react2.default.createElement(
@@ -103,7 +103,7 @@
 	      _react2.default.createElement(
 	        "div",
 	        { className: "tilearea" },
-	        tiles.map(function (row, idx) {
+	        tileValues.map(function (tile, idx) {
 	          return _react2.default.createElement(
 	            "p",
 	            {
