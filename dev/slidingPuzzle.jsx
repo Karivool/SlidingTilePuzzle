@@ -17,11 +17,14 @@ let slidingPuzzle = React.createClass({
 
   setTiles(tileValues) {
     let values = tileValues;
-    let tileSet = [[],[],[],[]];
+    let tileSet = [];
+    let count = [0, 1, 2, 3];
 
-    tileSet.forEach(function(tile) {
-      debugger
-    }.bind(values));
+    count.forEach(function(idx) {
+      tileSet.push(values.slice(idx * 4, 4 * (idx + 1)));
+    }.bind(this));
+
+    return tileSet;
   },
 
   tileClicked(idx) {

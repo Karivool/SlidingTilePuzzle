@@ -71,11 +71,14 @@
 	  },
 	  setTiles: function setTiles(tileValues) {
 	    var values = tileValues;
-	    var tileSet = [[], [], [], []];
+	    var tileSet = [];
+	    var count = [0, 1, 2, 3];
 
-	    tileSet.forEach(function (tile) {
-	      debugger;
-	    }.bind(values));
+	    count.forEach(function (idx) {
+	      tileSet.push(values.slice(idx * 4, 4 * (idx + 1)));
+	    }.bind(this));
+
+	    return tileSet;
 	  },
 	  tileClicked: function tileClicked(idx) {},
 	  shuffleNum: function shuffleNum(vals) {
