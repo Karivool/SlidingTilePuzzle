@@ -3,12 +3,12 @@
   justify-content:center;
   align-items:center;
   padding: 50px;
-  background: indigo;
+  background: #330031;
 }
 
 .tilearea {
   float: right;
-  width: 560px;
+  width: 600px;
 }
 
 .tile-normal {
@@ -17,11 +17,13 @@
   float: left;
   width: 120px;
   height: 120px;
-  background: white;
-  border-color: black;
-  border: solid 10px;
+  background: #c3d30c;
+  color: #da014a;
+  border: solid 10px #3f93b3;
+  border-radius: 15px;
   text-align: center;
   cursor: pointer;
+  margin: 1px;
 
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -31,13 +33,18 @@
   user-select: none;
 }
 
+.tile-normal:hover {
+  border-color: #53a122;
+}
+
 .tile-empty {
   float: left;
   width: 120px;
   height: 120px;
-  background: black;
-  border-color: black;
-  border: solid 10px;
+  background: #f31c04;
+  border: solid 10px #f45f01;
+  border-radius: 15px;
   text-align: center;
   cursor: pointer;
+  margin: 1px;
 }
