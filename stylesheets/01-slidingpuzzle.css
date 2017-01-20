@@ -8,7 +8,7 @@
 
 .tilearea {
   float: right;
-  width: 600px;
+  min-width: 600px;
 }
 
 .tile-normal {
