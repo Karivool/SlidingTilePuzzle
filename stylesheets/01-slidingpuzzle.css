@@ -16,6 +16,10 @@
   border: solid 10px;
   text-align: center;
   cursor: pointer;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .tile-empty {
