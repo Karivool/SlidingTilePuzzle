@@ -1,10 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+const GridRef = require('../constants/grid.js');
+
 let slidingPuzzle = React.createClass({
 
   getInitialState () {
-    let vals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+    let vals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
     let tileValues = this.shuffleNum(vals);
     let tileSet = this.setTiles(tileValues);
 
@@ -27,8 +29,12 @@ let slidingPuzzle = React.createClass({
     return tileSet;
   },
 
-  tileClicked(idx) {
-
+  tileClicked(tile, idx) {
+    let grid = this.state.tileSet;
+    debugger
+    if (tile === 16) {
+      return;
+    }
   },
 
   shuffleNum(vals) {
@@ -51,7 +57,7 @@ let slidingPuzzle = React.createClass({
             return <p
               key={"tile-" + idx}
               className={tile === emptyValue ? "tile-empty" : "tile-normal"}
-              onClick={ this.tileClicked.bind(this, idx)}
+              onClick={ this.tileClicked.bind(this, tile, idx)}
               >{tile === emptyValue ? "" : tile}
             </p>
           }.bind(this))

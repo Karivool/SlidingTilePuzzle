@@ -56,10 +56,12 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var GridRef = __webpack_require__(178);
+
 	var slidingPuzzle = _react2.default.createClass({
 	  displayName: "slidingPuzzle",
 	  getInitialState: function getInitialState() {
-	    var vals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+	    var vals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 	    var tileValues = this.shuffleNum(vals);
 	    var tileSet = this.setTiles(tileValues);
 
@@ -80,7 +82,13 @@
 
 	    return tileSet;
 	  },
-	  tileClicked: function tileClicked(idx) {},
+	  tileClicked: function tileClicked(tile, idx) {
+	    var grid = this.state.tileSet;
+	    debugger;
+	    if (tile === 16) {
+	      return;
+	    }
+	  },
 	  shuffleNum: function shuffleNum(vals) {
 	    for (var idx = vals.length; idx; idx--) {
 	      var rand = Math.floor(Math.random() * idx);
@@ -109,7 +117,7 @@
 	            {
 	              key: "tile-" + idx,
 	              className: tile === emptyValue ? "tile-empty" : "tile-normal",
-	              onClick: this.tileClicked.bind(this, idx)
+	              onClick: this.tileClicked.bind(this, tile, idx)
 	            },
 	            tile === emptyValue ? "" : tile
 	          );
@@ -21533,6 +21541,32 @@
 
 	module.exports = ReactDOMInvalidARIAHook;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 178 */
+/***/ function(module, exports) {
+
+	const GridRef = {
+	  0: [0, 0],
+	  1: [0, 1],
+	  2: [0, 2],
+	  3: [0, 3],
+	  4: [1, 0],
+	  5: [1, 1],
+	  6: [1, 2],
+	  7: [1, 3],
+	  8: [2, 0],
+	  9: [2, 1],
+	  10: [2, 2],
+	  11: [2, 3],
+	  12: [3, 0],
+	  13: [3, 1],
+	  14: [3, 2],
+	  15: [3, 3],
+	}
+
+	module.exports = GridRef;
+
 
 /***/ }
 /******/ ]);
