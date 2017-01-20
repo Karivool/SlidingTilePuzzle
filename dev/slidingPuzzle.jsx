@@ -27,7 +27,6 @@ let slidingPuzzle = React.createClass({
     let posY = 3;
     let idx = 15;
     let shuffleAmt = Math.round(Math.random() * 100 + 400);
-    console.log(shuffleAmt);
 
     for (let times = 0; times < shuffleAmt; times++) {
       let changed = false;

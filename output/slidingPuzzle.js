@@ -81,7 +81,6 @@
 	    var posY = 3;
 	    var idx = 15;
 	    var shuffleAmt = Math.round(Math.random() * 100 + 400);
-	    console.log(shuffleAmt);
 
 	    for (var times = 0; times < shuffleAmt; times++) {
 	      var changed = false;
