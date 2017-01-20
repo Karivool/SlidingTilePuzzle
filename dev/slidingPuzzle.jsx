@@ -41,7 +41,7 @@ let slidingPuzzle = React.createClass({
       return;
     } else if (grid[posX - 1][posY] === 16) {
       // up
-       
+
     } else if (grid[posX + 1][posY] === 16) {
       // down
 
@@ -64,7 +64,7 @@ let slidingPuzzle = React.createClass({
 
   render: function() {
     const tiles = this.state.tileSet;
-    const tileValues = this.state.tileValues.concat(16);
+    const tileValues = this.state.tileValues;
     const emptyValue = this.state.emptyValue;
 
     return (

@@ -119,7 +119,7 @@
 
 	  render: function render() {
 	    var tiles = this.state.tileSet;
-	    var tileValues = this.state.tileValues.concat(16);
+	    var tileValues = this.state.tileValues;
 	    var emptyValue = this.state.emptyValue;
 
 	    return _react2.default.createElement(
