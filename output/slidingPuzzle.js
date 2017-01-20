@@ -63,29 +63,90 @@
 	  displayName: "slidingPuzzle",
 	  getInitialState: function getInitialState() {
 	    var vals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
-	    var tileValues = this.shuffleNum(vals);
-	    var tileSet = this.setTiles(tileValues);
+	    var gridAndVals = this.makeSolveableBoard(vals);
+	    // let tileSet = this.setTiles(tileValues);
 	    var gridRef = GridRef;
 
 	    return {
-	      tileSet: tileSet,
-	      tileValues: tileValues,
+	      tileSet: gridAndVals[0],
+	      tileValues: gridAndVals[1],
 	      emptyValue: 16,
 	      gridRef: gridRef,
 	      sounds: SoundFX
 	    };
 	  },
-	  setTiles: function setTiles(tileValues) {
-	    var values = tileValues;
-	    var tileSet = [];
-	    var count = [0, 1, 2, 3];
+	  makeSolveableBoard: function makeSolveableBoard(vals) {
+	    var grid = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]];
+	    var posX = 3;
+	    var posY = 3;
+	    var idx = 15;
+	    var shuffleAmt = Math.round(Math.random() * (800 - 80) + 80);
 
-	    count.forEach(function (idx) {
-	      tileSet.push(values.slice(idx * 4, 4 * (idx + 1)));
-	    }.bind(this));
+	    for (var times = 0; times < shuffleAmt; times++) {
+	      var changed = false;
+	      while (changed === false) {
+	        var direction = Math.round(Math.random() * 3);
+	        changed = false;
+	        if (direction === 0 && grid[posX - 1] !== undefined) {
+	          // up
+	          vals[idx] = grid[posX - 1][posY];
+	          vals[idx - 4] = 16;
+	          idx -= 4;
 
-	    return tileSet;
+	          grid[posX][posY] = grid[posX - 1][posY];
+	          grid[posX - 1][posY] = 16;
+	          posX -= 1;
+	          changed = true;
+	        } else if (direction === 1 && grid[posX + 1] !== undefined) {
+	          // down
+	          vals[idx] = grid[posX + 1][posY];
+	          vals[idx + 4] = 16;
+	          idx += 4;
+
+	          grid[posX][posY] = grid[posX + 1][posY];
+	          grid[posX + 1][posY] = 16;
+	          posX += 1;
+	          changed = true;
+	        } else if (direction === 2 && grid[posX][posY - 1] !== undefined) {
+	          // left
+	          vals[idx] = grid[posX][posY - 1];
+	          vals[idx - 1] = 16;
+	          idx -= 1;
+
+	          grid[posX][posY] = grid[posX][posY - 1];
+	          grid[posX][posY - 1] = 16;
+	          posY -= 1;
+	          changed = true;
+	        } else if (direction === 3 && grid[posX][posY + 1] !== undefined) {
+	          // right
+	          vals[idx] = grid[posX][posY + 1];
+	          vals[idx + 1] = 16;
+	          idx += 1;
+
+	          grid[posX][posY] = grid[posX][posY + 1];
+	          grid[posX][posY + 1] = 16;
+	          posY += 1;
+	          changed = true;
+	        } else {}
+	      }
+	    }
+
+	    return [grid, vals];
 	  },
+
+
+	  // setTiles(tileValues) {
+	  //   let values = tileValues;
+	  //   let tileSet = [];
+	  //   let count = [0, 1, 2, 3];
+	  //
+	  //   count.forEach(function(idx) {
+	  //     tileSet.push(values.slice(idx * 4, 4 * (idx + 1)));
+	  //   }.bind(this));
+	  //
+	  //   return tileSet;
+	  // },
+
 	  tileClicked: function tileClicked(tile, idx) {
 	    var grid = this.state.tileSet;
 	    var vals = this.state.tileValues;
@@ -132,15 +193,6 @@
 
 	    sound.currentTime = 0;
 	    sound.play();
-	  },
-	  shuffleNum: function shuffleNum(vals) {
-	    for (var idx = vals.length; idx; idx--) {
-	      var rand = Math.floor(Math.random() * idx);
-	      var _ref = [vals[rand], vals[idx - 1]];
-	      vals[idx - 1] = _ref[0];
-	      vals[rand] = _ref[1];
-	    }
-	    return vals;
 	  },
 
 

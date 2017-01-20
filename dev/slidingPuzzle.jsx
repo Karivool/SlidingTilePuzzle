@@ -8,30 +8,91 @@ let slidingPuzzle = React.createClass({
 
   getInitialState () {
     let vals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
-    let tileValues = this.shuffleNum(vals);
-    let tileSet = this.setTiles(tileValues);
+    let gridAndVals = this.makeSolveableBoard(vals);
+    // let tileSet = this.setTiles(tileValues);
     let gridRef = GridRef;
 
     return {
-      tileSet: tileSet,
-      tileValues: tileValues,
+      tileSet: gridAndVals[0],
+      tileValues: gridAndVals[1],
       emptyValue: 16,
       gridRef: gridRef,
       sounds: SoundFX,
     };
   },
 
-  setTiles(tileValues) {
-    let values = tileValues;
-    let tileSet = [];
-    let count = [0, 1, 2, 3];
+  makeSolveableBoard(vals) {
+    let grid = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]];
+    let posX = 3;
+    let posY = 3;
+    let idx = 15;
+    let shuffleAmt = Math.round(Math.random() * (800 - 80) + 80);
 
-    count.forEach(function(idx) {
-      tileSet.push(values.slice(idx * 4, 4 * (idx + 1)));
-    }.bind(this));
+    for (let times = 0; times < shuffleAmt; times++) {
+      let changed = false;
+      while (changed === false) {
+        let direction = Math.round(Math.random() * 3);
+        changed = false;
+        if (direction === 0 && grid[posX - 1] !== undefined) {
+          // up
+          vals[idx] = grid[posX - 1][posY];
+          vals[idx - 4] = 16;
+          idx -= 4;
 
-    return tileSet;
+          grid[posX][posY] = grid[posX - 1][posY];
+          grid[posX - 1][posY] = 16;
+          posX -= 1;
+          changed = true;
+        } else if (direction === 1 && grid[posX + 1] !== undefined) {
+          // down
+          vals[idx] = grid[posX + 1][posY];
+          vals[idx + 4] = 16;
+          idx += 4;
+
+          grid[posX][posY] = grid[posX + 1][posY];
+          grid[posX + 1][posY] = 16;
+          posX += 1;
+          changed = true;
+        } else if (direction === 2 && grid[posX][posY - 1] !== undefined) {
+          // left
+          vals[idx] = grid[posX][posY - 1];
+          vals[idx - 1] = 16;
+          idx -= 1;
+
+          grid[posX][posY] = grid[posX][posY - 1];
+          grid[posX][posY - 1] = 16;
+          posY -= 1;
+          changed = true;
+        } else if (direction === 3 && grid[posX][posY + 1] !== undefined) {
+          // right
+          vals[idx] = grid[posX][posY + 1];
+          vals[idx + 1] = 16;
+          idx += 1;
+
+          grid[posX][posY] = grid[posX][posY + 1];
+          grid[posX][posY + 1] = 16;
+          posY += 1;
+          changed = true;
+        } else {
+
+        }
+      }
+    }
+
+    return [grid, vals];
   },
+
+  // setTiles(tileValues) {
+  //   let values = tileValues;
+  //   let tileSet = [];
+  //   let count = [0, 1, 2, 3];
+  //
+  //   count.forEach(function(idx) {
+  //     tileSet.push(values.slice(idx * 4, 4 * (idx + 1)));
+  //   }.bind(this));
+  //
+  //   return tileSet;
+  // },
 
   tileClicked(tile, idx) {
     let grid = this.state.tileSet;
@@ -82,13 +143,6 @@ let slidingPuzzle = React.createClass({
     sound.play();
   },
 
-  shuffleNum(vals) {
-    for (let idx = vals.length; idx; idx--) {
-      let rand = Math.floor(Math.random() * idx);
-      [vals[idx - 1], vals[rand]] = [vals[rand], vals[idx - 1]];
-    }
-    return vals;
-  },
 
   render: function() {
     const tiles = this.state.tileSet;
