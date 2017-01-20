@@ -64,11 +64,13 @@
 	    var vals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 	    var tileValues = this.shuffleNum(vals);
 	    var tileSet = this.setTiles(tileValues);
+	    var gridRef = GridRef;
 
 	    return {
 	      tileSet: tileSet,
 	      tileValues: tileValues,
-	      emptyValue: 16
+	      emptyValue: 16,
+	      gridRef: gridRef
 	    };
 	  },
 	  setTiles: function setTiles(tileValues) {
@@ -84,9 +86,24 @@
 	  },
 	  tileClicked: function tileClicked(tile, idx) {
 	    var grid = this.state.tileSet;
+	    var posX = this.state.gridRef[idx][0];
+	    var posY = this.state.gridRef[idx][1];
+
 	    debugger;
 	    if (tile === 16) {
 	      return;
+	    } else if (grid[posX - 1][posY] === 16) {
+	      // up
+
+	    } else if (grid[posX + 1][posY] === 16) {
+	      // down
+
+	    } else if (grid[posX][posY - 1] === 16) {
+	      // left
+
+	    } else if (grid[posX][posY + 1] === 16) {
+	      // right
+
 	    }
 	  },
 	  shuffleNum: function shuffleNum(vals) {
