@@ -33,25 +33,39 @@ let slidingPuzzle = React.createClass({
 
   tileClicked(tile, idx) {
     let grid = this.state.tileSet;
+    let vals = this.state.tileValues;
     let posX = this.state.gridRef[idx][0];
     let posY = this.state.gridRef[idx][1];
 
-    debugger
     if (tile === 16) {
       return;
-    } else if (grid[posX - 1][posY] === 16) {
+    } else if (grid[posX - 1] !== undefined && grid[posX - 1][posY] === 16) {
       // up
-
-    } else if (grid[posX + 1][posY] === 16) {
+      vals[idx - 4] = tile
+      grid[posX - 1][posY] = tile;
+    } else if (grid[posX + 1] !== undefined && grid[posX + 1][posY] === 16) {
       // down
-
+      vals[idx + 4] = tile;
+      grid[posX + 1][posY] = tile;
     } else if (grid[posX][posY - 1] === 16) {
       // left
-
+      vals[idx - 1] = tile;
+      grid[posX][posY - 1] = tile;
     } else if (grid[posX][posY + 1] === 16) {
       // right
-
+      vals[idx + 1] = tile;
+      grid[posX][posY + 1] = tile;
+    } else {
+      return;
     }
+
+    grid[posX][posY] = 16;
+    vals[idx] = 16;
+
+    this.setState({
+      tileSet: grid,
+      tileValues: vals,
+    });
   },
 
   shuffleNum(vals) {
