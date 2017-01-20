@@ -78,7 +78,6 @@ let slidingPuzzle = React.createClass({
     let track = sounds[trackNumber];
     let sound = new Audio(track);
 
-    console.log(trackNumber);
     sound.currentTime = 0;
     sound.play();
   },

@@ -130,7 +130,6 @@
 	    var track = sounds[trackNumber];
 	    var sound = new Audio(track);
 
-	    console.log(trackNumber);
 	    sound.currentTime = 0;
 	    sound.play();
 	  },
