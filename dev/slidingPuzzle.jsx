@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 const GridRef = require('../constants/grid.js');
+const SoundFX = require('../constants/sounds.js');
 
 let slidingPuzzle = React.createClass({
 
@@ -16,6 +17,7 @@ let slidingPuzzle = React.createClass({
       tileValues: tileValues,
       emptyValue: 16,
       gridRef: gridRef,
+      sounds: SoundFX,
     };
   },
 
@@ -66,6 +68,19 @@ let slidingPuzzle = React.createClass({
       tileSet: grid,
       tileValues: vals,
     });
+
+    this.playSound();
+  },
+
+  playSound() {
+    const sounds = this.state.sounds;
+    let trackNumber = Math.abs(Math.round(Math.random() * sounds.length - 1));
+    let track = sounds[trackNumber];
+    let sound = new Audio(track);
+
+    console.log(trackNumber);
+    sound.currentTime = 0;
+    sound.play();
   },
 
   shuffleNum(vals) {

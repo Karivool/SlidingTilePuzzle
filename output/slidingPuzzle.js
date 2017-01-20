@@ -57,6 +57,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var GridRef = __webpack_require__(178);
+	var SoundFX = __webpack_require__(179);
 
 	var slidingPuzzle = _react2.default.createClass({
 	  displayName: "slidingPuzzle",
@@ -70,7 +71,8 @@
 	      tileSet: tileSet,
 	      tileValues: tileValues,
 	      emptyValue: 16,
-	      gridRef: gridRef
+	      gridRef: gridRef,
+	      sounds: SoundFX
 	    };
 	  },
 	  setTiles: function setTiles(tileValues) {
@@ -119,6 +121,18 @@
 	      tileSet: grid,
 	      tileValues: vals
 	    });
+
+	    this.playSound();
+	  },
+	  playSound: function playSound() {
+	    var sounds = this.state.sounds;
+	    var trackNumber = Math.abs(Math.round(Math.random() * sounds.length - 1));
+	    var track = sounds[trackNumber];
+	    var sound = new Audio(track);
+
+	    console.log(trackNumber);
+	    sound.currentTime = 0;
+	    sound.play();
 	  },
 	  shuffleNum: function shuffleNum(vals) {
 	    for (var idx = vals.length; idx; idx--) {
@@ -21597,6 +21611,23 @@
 	}
 
 	module.exports = GridRef;
+
+
+/***/ },
+/* 179 */
+/***/ function(module, exports) {
+
+	const SoundFX = [
+	  "./sounds/slide01.mp3",
+	  "./sounds/slide02.mp3",
+	  "./sounds/slide03.mp3",
+	  "./sounds/slide04.mp3",
+	  "./sounds/slide05.mp3",
+	  "./sounds/slide06.mp3",
+	  "./sounds/slide07.mp3",
+	]
+
+	module.exports = SoundFX;
 
 
 /***/ }
