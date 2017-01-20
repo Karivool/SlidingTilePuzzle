@@ -8,6 +8,7 @@
 
 .tilearea {
   float: right;
+  min-width: 580px;
   max-width: 600px;
 }
 
