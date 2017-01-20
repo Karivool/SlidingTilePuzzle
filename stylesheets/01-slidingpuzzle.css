@@ -1,13 +1,19 @@
 .main {
-  height: 600px;
-  width: 600px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   padding: 50px;
-  background: maroon;
+  background: indigo;
+}
+
+.tilearea {
+  float: right;
+  width: 560px;
 }
 
 .tile-normal {
   font-family: 'Arvo';
-  font-size: 48px;
+  font-size: 72px;
   float: left;
   width: 120px;
   height: 120px;
@@ -20,6 +26,9 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 .tile-empty {
